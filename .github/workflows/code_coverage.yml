@@ -19,7 +19,6 @@ concurrency:
 jobs:
   code_coverage_run:
     name: Run Code Coverage
-    if: ${{ needs.compute_changed_files.outputs.can_skip_files != 'true' }}
     runs-on: ubuntu-20.04
     env:
       CACHE_DIRECTORY: ~/.bazel_cache
@@ -132,7 +131,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: coverage-report-artifact
-          pattern: coverage-report-*
+          pattern: coverage-report
           merge-multiple: true
 
       - name: Filter Coverage Reports
