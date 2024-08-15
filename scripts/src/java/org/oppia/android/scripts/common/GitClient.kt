@@ -29,8 +29,7 @@ class GitClient(
 
   /** The list of files that have been committed in the local branch. */
   val committedFiles: List<String> by lazy {
-    retrieveChangedCommittedFiles() +
-      retrieveRenamedFiles()
+    retrieveChangedCommittedFiles()
   }
 
   private fun retrieveCurrentCommit(): String {
