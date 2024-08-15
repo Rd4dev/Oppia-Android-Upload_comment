@@ -19,7 +19,6 @@ concurrency:
 jobs:
   code_coverage_run:
     name: Run Code Coverage
-    if: ${{ needs.compute_changed_files.outputs.can_skip_files != 'true' }}
     runs-on: ubuntu-20.04
     env:
       CACHE_DIRECTORY: ~/.bazel_cache
@@ -116,7 +115,6 @@ jobs:
       - name: Upload Coverage Report Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-report # Saving with unique names to avoid conflict
           path: coverage_reports
 
   evaluate-code-coverage-reports:
@@ -132,13 +130,12 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: coverage-report-artifact
-          pattern: coverage-report-*
-          merge-multiple: true
 
       - name: Filter Coverage Reports
         run: |
           # Find all coverage_report.pb files in the current directory and subdirectories
           PB_FILES_LIST=($(find . -name "coverage_report.pb" -type f -print0 | xargs -0 -n 1 echo))
+          echo "${PB_FILES_LIST[@]}"
           echo "${PB_FILES_LIST[@]}" > pb_files.txt
 
       - name: Set up Bazel
