@@ -17,19 +17,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  check_unit_tests_completed:
-    name: Check unit test completed
-    runs-on: ubuntu-latest
-    steps:
-      - name: Wait for unit tests to checks
-        uses: ArcticLampyrid/action-wait-for-workflow@v1.2.0
-        with:
-          workflow: unit_tests.yml
-          sha: auto
-
   compute_changed_files:
     name: Compute changed files
-    needs: check_unit_tests_completed
     runs-on: ubuntu-20.04
     outputs:
       matrix: ${{ steps.compute-file-matrix.outputs.matrix }}
@@ -331,7 +320,7 @@ jobs:
   # Reference: https://github.community/t/127354/7.
   check_coverage_results:
     name: Check Code Coverage Results
-    needs: [ compute_changed_files, code_coverage_run, evaluate-code-coverage-reports ]
+    needs: [ compute_changed_files, code_coverage_run, publish_coverage_report, evaluate-code-coverage-reports ]
     # The expression if: ${{ !cancelled() }} runs a job or step regardless of its success or failure while responding to cancellations,
     # serving as a cancellation-compliant alternative to if: ${{ always() }} in concurrent workflows.
     if: ${{ !cancelled() }}
