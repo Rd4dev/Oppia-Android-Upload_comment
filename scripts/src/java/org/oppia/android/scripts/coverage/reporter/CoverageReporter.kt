@@ -46,6 +46,7 @@ fun main(vararg args: String) {
 
   pbTxtFile.takeIf { it.exists() }?.let {
     val pbList = pbTxtFile.readText()
+    println("List in pbList: $pbList")
     val filePathList = pbList.split(" ")
       .filter { it.isNotBlank() }
       .map { it.trim() }
@@ -690,5 +691,3 @@ private fun loadTestFileExemptionsProto(
     }.build()
   }
 }
-
-
