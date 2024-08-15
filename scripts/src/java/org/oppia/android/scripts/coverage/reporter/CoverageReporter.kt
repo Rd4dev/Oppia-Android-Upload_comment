@@ -53,7 +53,7 @@ fun main(vararg args: String) {
 
     val coverageResultList = filePathList.mapNotNull { filePath ->
       try {
-        println("Filepath: $filePath")
+        println("Filepath-: $filePath")
         File(repoRoot, filePath).inputStream().use { stream ->
           CoverageReport.newBuilder().also { builder ->
             builder.mergeFrom(stream)
