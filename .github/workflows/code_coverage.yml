@@ -187,9 +187,6 @@ jobs:
           issue-number: ${{ github.event.pull_request.number }}
           body-path: 'CoverageReport.md'
 
-      - name: Simulating the comment upload time - 1 minute
-        run: sleep 60
-
   # Reference: https://github.community/t/127354/7.
   check_coverage_results:
     name: Check Code Coverage Results
