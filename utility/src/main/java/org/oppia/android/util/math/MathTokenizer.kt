@@ -13,7 +13,7 @@ import org.oppia.android.util.math.PeekableIterator.Companion.toPeekableIterator
 import java.lang.StringBuilder
 
 /**
- * Input tokenizer for math (numeric & algebraic) expressions and equations.
+ * Input tokenizer for math (numeric & algebraic) expressions and - equations.
  *
  * See https://docs.google.com/document/d/1JMpbjqRqdEpye67HvDoqBo_rtScY9oEaB7SwKBBspss/edit for the
  * grammar specification supported by this tokenizer.
